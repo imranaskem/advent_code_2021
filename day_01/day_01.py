@@ -1,4 +1,4 @@
-from utils.utils import load_text_file
+from utils.utils import load_text_file_get_num_list
 
 
 def calculate_number_depth_increases(depths: list) -> int:
@@ -19,5 +19,5 @@ def calculate_number_depth_increases(depths: list) -> int:
 
 
 if __name__ == '__main__':
-    depths = load_text_file('input.txt', __file__)
+    depths = load_text_file_get_num_list('input.txt', __file__)
     print(calculate_number_depth_increases(depths))

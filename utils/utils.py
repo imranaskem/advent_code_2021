@@ -2,7 +2,19 @@ import csv
 import os
 
 
-def load_text_file(name, filepath):
+def load_text_file(name, filepath, process):
+    inputs = []
+
+    path = get_file_path(name, filepath)
+
+    with open(path) as file:
+        for line in file:
+            inputs.append(process(line))
+
+    return inputs
+
+
+def load_text_file_get_num_list(name, filepath):
     inputs = []
 
     path = get_file_path(name, filepath)
