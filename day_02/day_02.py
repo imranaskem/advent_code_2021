@@ -2,10 +2,19 @@ from utils.utils import load_text_file
 
 
 def calculate_distance(instructions: list) -> int:
-    forward_move = sum([int(move) for ins, move in instructions if ins == 'forward'])
-    net_depth = sum([int(move) for ins, move in instructions if ins == 'down']) \
-        - sum([int(move) for ins, move in instructions if ins == 'up'])
-    return forward_move * net_depth
+    aim = 0
+    forward_move = 0
+    depth = 0
+    for ins, move in instructions:
+        num_move = int(move)
+        if ins == 'forward':
+            forward_move += num_move
+            depth += aim * num_move
+        if ins == 'up':
+            aim -= num_move
+        if ins == 'down':
+            aim += num_move
+    return forward_move * depth
 
 
 if __name__ == '__main__':
