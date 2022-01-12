@@ -2,6 +2,15 @@ import csv
 import os
 
 
+def load_text_file_process(name, filepath, process):
+    path = get_file_path(name, filepath)
+
+    with open(path) as file:
+        inputs = process(file)
+
+    return inputs
+
+
 def load_text_file(name, filepath, process):
     inputs = []
 
