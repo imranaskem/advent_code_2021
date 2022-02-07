@@ -47,6 +47,19 @@ class BingoBoard:
         return sum([num.number for num in self.numbers if num.marked is False])
 
 
+def calculate_score(numbers: List[int], boards: List[BingoBoard]) -> int:
+    completed = []
+    for num in numbers:
+        for board in boards:
+            board.mark_number(num)
+            if board.check_for_matched_set():
+                if board not in completed:
+                    completed.append(board)
+                if len(completed) == len(boards):
+                    final_board = completed[-1]
+                    return final_board.sum_of_non_matched_numbers() * num
+
+
 def process_file(file):
     first_line = True
     board_row = 1
@@ -73,14 +86,6 @@ def process_file(file):
                 boards.append(board)
                 board_row = 1
     return numbers, boards
-
-
-def calculate_score(numbers: List[int], boards: List[BingoBoard]) -> int:
-    for num in numbers:
-        for board in boards:
-            board.mark_number(num)
-            if board.check_for_matched_set():
-                return board.sum_of_non_matched_numbers() * num
 
 
 if __name__ == '__main__':
